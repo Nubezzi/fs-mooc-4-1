@@ -15,14 +15,15 @@ blogsRouter.get('/api/blogs', async (request, response) => {
   }
 })
 
-blogsRouter.post('/api/blogs', (request, response) => {
-  const blog = new Blog(request.body)
+blogsRouter.post('/api/blogs', async (request, response) => {
+  try {
+    const blog = new Blog(request.body)
     console.log(request.body)
-  blog
-    .save()
-    .then(result => {
-      response.status(201).json(result)
-    })
+    const result = await blog.save()
+    response.status(201).json(result)
+  } catch (error) {
+    console.log('ööh2')
+  }
 })
 
 module.exports = blogsRouter

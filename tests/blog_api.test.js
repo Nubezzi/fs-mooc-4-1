@@ -48,6 +48,22 @@ test('id is correctly formated as "id" not "_id"', async () => {
     res.body.forEach((val) => expect(val.id).toBeDefined())
 })
 
+test('post adds a new blog', async () => {
+    const newBlog = {
+        title: "testi",
+        author: "asdad",
+        url: "juuh.google.fi",
+        likes: 10,
+    }
+    await api
+        .post('/api/blogs')
+        .send(newBlog)
+        .expect(201)
+
+    const response = await api.get('/api/blogs')
+    expect(response.body).toHaveLength(initialBlogs.length + 1)
+})
+
 afterAll(async () => {
   await mongoose.connection.close()
 })
