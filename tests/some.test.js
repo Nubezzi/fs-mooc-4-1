@@ -62,14 +62,25 @@ describe('total likes', () => {
   })
 })
 
-describe('total likes', () => {
+describe('fav blog', () => {
   let exp_res = {
     title: "Canonical string reduction",
     author: "Edsger W. Dijkstra",
     likes: 12
   }
-  test('when list has only one blog equals the likes of that', () => {
+  test('the blog with most likes', () => {
     const result = listHelper.favoriteBlog(blogs)
+    expect(result).toEqual(exp_res)
+  })
+})
+
+describe('most blogs', () => {
+  let exp_res = {
+    author: "Robert C. Martin",
+    blogs: 3
+  }
+  test('author with most blogs and the amount of those blogs', () => {
+    const result = listHelper.mostBlogsByAuthor(blogs)
     expect(result).toEqual(exp_res)
   })
 })
