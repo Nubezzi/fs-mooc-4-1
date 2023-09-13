@@ -41,8 +41,14 @@ test('blogs are returned as json', async () => {
 test('correct num of blogs returned', async () => {
     let res = await api.get('/api/blogs')
     expect(res.body).toHaveLength(initialBlogs.length)
-  })
+})
+
+test('id is correctly formated as "id" not "_id"', async () => {
+    let res = await api.get('/api/blogs')
+    res.body.forEach((val) => expect(val.id).toBeDefined())
+})
 
 afterAll(async () => {
   await mongoose.connection.close()
 })
+
